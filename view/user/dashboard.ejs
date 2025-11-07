@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .btn-custom {
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+        }
+        .header {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="header bg-blue-600 text-white rounded-xl p-6 mb-6 text-center">
+            <h2 class="text-2xl font-bold">Selamat Datang, <%= nama %></h2>
+            <a href="/logout" class="btn btn-outline-light mt-3 inline-flex items-center px-4 py-2 rounded-lg hover:bg-blue-700">
+                <i class="fas fa-sign-out-alt mr-2"></i> Keluar
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card bg-white rounded-xl shadow-lg">
+                <div class="card-body text-center p-6">
+                    <i class="fas fa-plus-circle text-blue-500 text-4xl mb-4"></i>
+                    <h5 class="card-title text-lg font-bold text-gray-800">1. Tambah Nomor WhatsApp</h5>
+                    <p class="card-text text-gray-600 text-sm mb-4">Tambah dan hubungkan sesi WhatsApp baru.</p>
+                    <a href="/user/nomor-wa/tambah" class="btn btn-primary btn-custom px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Tambah Nomor WA</a>
+                </div>
+            </div>
+
+            <div class="card bg-white rounded-xl shadow-lg">
+                <div class="card-body text-center p-6">
+                    <i class="fas fa-file-upload text-blue-500 text-4xl mb-4"></i>
+                    <h5 class="card-title text-lg font-bold text-gray-800">2. Upload Nomor</h5>
+                    <p class="card-text text-gray-600 text-sm mb-4">Impor file Excel berisi nomor tujuan.</p>
+                    <a href="/user/upload" class="btn btn-primary btn-custom px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Upload Excel</a>
+                </div>
+            </div>
+
+            <div class="card bg-white rounded-xl shadow-lg">
+                <div class="card-body text-center p-6">
+                    <i class="fas fa-paper-plane text-blue-500 text-4xl mb-4"></i>
+                    <h5 class="card-title text-lg font-bold text-gray-800">3. Kirim Pesan</h5>
+                    <p class="card-text text-gray-600 text-sm mb-4">Kirim pesan teks & gambar ke banyak nomor.</p>
+                    <a href="/user/kirim" class="btn btn-primary btn-custom px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Kirim Pesan</a>
+                </div>
+            </div>
+
+            <div class="card bg-white rounded-xl shadow-lg">
+                <div class="card-body text-center p-6">
+                    <i class="fas fa-list-alt text-blue-500 text-4xl mb-4"></i>
+                    <h5 class="card-title text-lg font-bold text-gray-800">4. Nomor WhatsApp Saya</h5>
+                    <p class="card-text text-gray-600 text-sm mb-4">Lihat semua sesi WhatsApp yang telah ditambahkan.</p>
+                    <a href="/user/nomor-wa" class="btn btn-primary btn-custom px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Lihat Nomor WA</a>
+                </div>
+            </div>
+
+            <div class="card bg-white rounded-xl shadow-lg">
+                <div class="card-body text-center p-6">
+                    <i class="fas fa-address-book text-blue-500 text-4xl mb-4"></i>
+                    <h5 class="card-title text-lg font-bold text-gray-800">5. Nomor</h5>
+                    <p class="card-text text-gray-600 text-sm mb-4">Nomor yang disimpan.</p>
+                    <a href="/user/nomor" class="btn btn-primary btn-custom px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">Lihat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

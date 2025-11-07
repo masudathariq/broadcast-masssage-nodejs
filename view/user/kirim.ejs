@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirim Pesan Massal</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f0f4f8, #e2e8f0);
+      min-height: 100vh;
+    }
+    .form-container {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .btn-custom {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .placeholder-box {
+      background: #f1f5f9;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+    .list-item {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: background 0.3s;
+    }
+    .list-item:hover {
+      background: #f8fafc;
+    }
+    .footer {
+      background: linear-gradient(to top, #1e3a8a, #3b82f6);
+      color: white;
+      clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Judul Halaman -->
+    <div class="flex items-center mb-6">
+      <i class="fas fa-envelope text-4xl text-blue-600 mr-4"></i>
+      <h2 class="text-3xl font-bold text-gray-800">Kirim Pesan Massal</h2>
+    </div>
+
+    <!-- Tombol Kembali -->
+    <a href="/dashboard" class="btn-custom bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center mb-6 inline-flex">
+      <i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard
+    </a>
+
+    <!-- Form Kirim Pesan -->
+    <div class="form-container p-6">
+      <form action="/user/kirim" method="POST" enctype="multipart/form-data">
+        <div class="mb-6">
+          <label for="pesan" class="block text-gray-700 font-medium mb-2">Pesan:</label>
+          <textarea name="pesan" id="pesan" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Contoh: Halo {nama}, kami ingin menghubungimu..." required></textarea>
+          <p class="text-sm text-gray-500 mt-2">Gunakan <code>{nama}</code> untuk menyisipkan nama dari database ke dalam pesan.</p>
+          <div class="placeholder-box mt-3">
+            Contoh pesan: <br>
+            <strong>Halo {nama},</strong> kami ingin menginformasikan bahwa layanan Anda aktif kembali. ✅
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="gambar" class="block text-gray-700 font-medium mb-2">Upload Gambar (Opsional):</label>
+          <input type="file" name="gambar" id="gambar" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" accept="image/*">
+        </div>
+
+        <div class="mb-6">
+          <label for="session" class="block text-gray-700 font-medium mb-2">Pilih Nomor WhatsApp Pengirim (Opsional):</label>
+          <select name="session" id="session" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">-- Semua Session Otomatis --</option>
+            <% sessions.forEach(s => { %>
+              <option value="<%= s.sessionName %>"><%= s.sessionName %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-custom bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex items-center">
+          <i class="fas fa-paper-plane mr-2"></i> Kirim Pesan
+        </button>
+      </form>
+    </div>
+
+    <!-- Daftar Nomor Tujuan -->
+    <hr class="my-8 border-gray-300">
+    <h4 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+      <i class="fas fa-list-ul mr-2"></i> Daftar Nomor Tujuan
+    </h4>
+    <div class="grid gap-4">
+      <% nomor.forEach(n => { %>
+        <div class="list-item p-4 flex justify-between items-center">
+          <strong class="text-gray-800"><%= n.nama %></strong>
+          <span class="text-gray-600"><%= n.nomor %></span>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer py-12 mt-12 text-center">
+      <p class="text-lg">© 2025 Kirim Pesan Massal. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    function checkAll(status) {
+      const checkboxes = document.querySelectorAll('input[name="tujuan[]"]');
+      checkboxes.forEach(c => c.checked = status);
+    }
+  </script>
+</body>
+</html>

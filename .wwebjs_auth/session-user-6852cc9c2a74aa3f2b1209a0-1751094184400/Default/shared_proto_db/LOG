@@ -1,0 +1,4 @@
+2025/06/28-14:07:49.937 1dec Creating DB D:\laragon\www\wa-gooo\.wwebjs_auth\session-user-6852cc9c2a74aa3f2b1209a0-1751094184400\Default\shared_proto_db since it was missing.
+2025/06/28-14:07:49.940 1dec Reusing MANIFEST D:\laragon\www\wa-gooo\.wwebjs_auth\session-user-6852cc9c2a74aa3f2b1209a0-1751094184400\Default\shared_proto_db/MANIFEST-000001
+2025/06/28-14:07:49.940 1dec Recovering log #3
+2025/06/28-14:07:49.941 1dec Reusing old log D:\laragon\www\wa-gooo\.wwebjs_auth\session-user-6852cc9c2a74aa3f2b1209a0-1751094184400\Default\shared_proto_db/000003.log 

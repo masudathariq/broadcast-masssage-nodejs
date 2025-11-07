@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .welcome-message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .icon-title {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Judul Halaman dengan Ikon -->
+        <h1 class="welcome-message"><i class="fas fa-user-shield icon-title"></i> Selamat Datang, <%= nama %> (Admin)</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card bg-light shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x mb-3"></i>
+                        <h5 class="card-title">Kelola User</h5>
+                        <p class="card-text">Lihat dan kelola semua user dalam sistem.</p>
+                        <a href="/admin/users" class="btn btn-primary btn-custom">Buka</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sign-out-alt fa-3x mb-3"></i>
+                        <h5 class="card-title">Logout</h5>
+                        <p class="card-text">Keluar dari sistem dengan aman.</p>
+                        <a href="/logout" class="btn btn-danger btn-custom">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <h5 class="card-title">Statistik</h5>
+                        <p class="card-text">Lihat statistik penggunaan sistem.</p>
+                        <a href="/admin/stats" class="btn btn-info btn-custom">Lihat Statistik</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

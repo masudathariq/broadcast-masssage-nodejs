@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Nomor WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f0f4f8, #e2e8f0);
+      min-height: 100vh;
+    }
+    .btn-custom {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .table-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .table-row:hover {
+      background-color: #f1f5f9;
+      transition: background-color 0.3s;
+    }
+    .footer {
+      background: linear-gradient(to top, #1e3a8a, #3b82f6);
+      color: white;
+      clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Judul Halaman dengan Ikon -->
+    <div class="flex items-center mb-6">
+      <i class="fas fa-phone-alt text-4xl text-blue-600 mr-4"></i>
+      <h2 class="text-3xl font-bold text-gray-800">Daftar Nomor WhatsApp</h2>
+    </div>
+
+    <!-- Navigasi -->
+    <div class="flex flex-wrap gap-4 mb-8">
+      <a href="/dashboard" class="btn-custom bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center">
+        <i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard
+      </a>
+      <a href="/user/upload" class="btn-custom bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 flex items-center">
+        <i class="fas fa-upload mr-2"></i> Upload Nomor dari Excel
+      </a>
+      <form action="/user/nomor/hapus-semua" method="POST" onsubmit="return confirm('Yakin ingin menghapus SEMUA nomor?')" class="inline-flex">
+        <button type="submit" class="btn-custom bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 flex items-center">
+          <i class="fas fa-trash-alt mr-2"></i> Hapus Semua
+        </button>
+      </form>
+    </div>
+
+    <!-- Tabel Data -->
+    <% if (data.length === 0) { %>
+      <div class="bg-yellow-100 text-yellow-800 p-4 rounded-lg mb-6">
+        Belum ada nomor yang ditampilkan.
+      </div>
+    <% } else { %>
+      <div class="table-card">
+        <table class="w-full text-left">
+          <thead class="bg-blue-600 text-white">
+            <tr>
+              <th class="p-4">No</th>
+              <th class="p-4">Nama</th>
+              <th class="p-4">Nomor</th>
+              <th class="p-4">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach((item, index) => { %>
+              <tr class="table-row border-b">
+                <td class="p-4"><%= index + 1 %></td>
+                <td class="p-4"><%= item.nama %></td>
+                <td class="p-4"><%= item.nomor %></td>
+                <td class="p-4">
+                  <form action="/user/nomor/<%= item._id %>/delete" method="POST" onsubmit="return confirm('Yakin ingin menghapus nomor ini?');">
+                    <button type="submit" class="btn-custom bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 flex items-center">
+                      <i class="fas fa-trash-alt mr-2"></i> Hapus
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="footer py-12 mt-12 text-center">
+    <p class="text-lg">© 2025 Daftar Nomor WhatsApp. All rights reserved.</p>
+  </div>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

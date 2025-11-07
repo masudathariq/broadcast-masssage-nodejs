@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadata dasar dan konfigurasi responsif -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Management</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome untuk ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- CSS tambahan untuk styling kustom -->
+  <style>
+    :root {
+      /* Variabel warna utama */
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --secondary: #6b7280;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    /* Gaya kartu */
+    .card {
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    }
+
+    /* Tombol dengan warna khusus */
+    .btn-primary { background-color: var(--primary); }
+    .btn-primary:hover { background-color: var(--primary-light); }
+    .btn-secondary { background-color: var(--secondary); }
+    .btn-secondary:hover { background-color: #4b5563; }
+    .btn-danger { background-color: var(--danger); }
+    .btn-success { background-color: var(--success); }
+    .btn-warning { background-color: var(--warning); }
+
+    /* Badge untuk role */
+    .role-admin { background-color: #e0e7ff; color: #4f46e5; }
+    .role-user { background-color: #ecfdf5; color: #10b981; }
+    .role-editor { background-color: #fef3c7; color: #d97706; }
+
+    /* Responsivitas tabel */
+    .table-responsive { overflow-x: auto; }
+
+    /* Penyesuaian mobile */
+    @media (max-width: 768px) {
+      .table-responsive { width: 100%; }
+      .header-buttons { flex-direction: column; gap: 0.5rem; }
+      .header-buttons a { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Container utama -->
+  <div class="container mx-auto px-4 py-8">
+
+    <!-- Header halaman -->
+    <div class="flex justify-between items-center mb-8">
+      <div class="flex items-center gap-4">
+        <!-- Tombol kembali -->
+        <a href="/admin/dashboard" class="btn-secondary text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-600">
+          <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+        </a>
+
+        <!-- Judul halaman -->
+        <h1 class="text-3xl font-bold text-gray-800">User Management</h1>
+      </div>
+
+      <!-- Tombol tambah user -->
+      <a href="/admin/users/create" class="btn-primary text-white px-6 py-2 rounded-lg flex items-center gap-2">
+        <i class="fas fa-user-plus"></i> Tambah User Baru
+      </a>
+    </div>
+
+    <!-- Kartu konten -->
+    <div class="card bg-white rounded-lg p-6">
+
+      <!-- Header tabel & search -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-700">User List</h2>
+
+        <!-- Kolom pencarian -->
+        <div class="relative">
+          <input type="text" placeholder="Search users..." class="border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Tabel user -->
+      <div class="table-responsive">
+        <table class="w-full text-left">
+          <thead class="bg-gray-100 text-gray-600 uppercase text-sm">
+            <tr>
+              <th class="px-6 py-3">Name</th>
+              <th class="px-6 py-3">Email</th>
+              <th class="px-6 py-3">Role</th>
+              <th class="px-6 py-3">Status</th>
+              <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600">
+            <!-- Loop setiap user -->
+            <% users.forEach(user => { %>
+              <tr class="border-b border-gray-200 hover:bg-gray-50">
+                <!-- Nama dan avatar -->
+                <td class="px-6 py-4 font-medium text-gray-900">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <%= user.nama %>
+                  </div>
+                </td>
+
+                <!-- Email user -->
+                <td class="px-6 py-4"><%= user.email %></td>
+
+                <!-- Role user -->
+                <td class="px-6 py-4">
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold role-<%= user.role.toLowerCase() %>">
+                    <%= user.role %>
+                  </span>
+                </td>
+
+                <!-- Status online/offline -->
+                <td class="px-6 py-4">
+                  <br>
+                  <% if (user.lastLogin && (new Date() - new Date(user.lastLogin)) < 3 * 60 * 1000) { %>
+                    <span class="text-green-600 text-xs">🟢 Aktif</span>
+                  <% } else { %>
+                    <span class="text-gray-400 text-xs">⚪ Tidak Aktif</span>
+                  <% } %>
+                </td>
+
+                <!-- Aksi: Edit, Hapus, Aktifkan/Nonaktifkan -->
+                <td class="px-6 py-4 text-right">
+                  <div class="flex justify-end gap-2 flex-wrap">
+                    <!-- Tombol edit -->
+                    <a href="/admin/users/<%= user._id %>/edit" class="btn-warning text-white px-4 py-1 rounded text-sm flex items-center gap-1">
+                      <i class="fas fa-edit text-xs"></i> Edit
+                    </a>
+
+                    <!-- Tombol delete -->
+                    <form method="POST" action="/admin/users/<%= user._id %>/delete" class="inline">
+                      <button type="submit" class="btn-danger text-white px-4 py-1 rounded text-sm flex items-center gap-1" onclick="return confirm('Hapus user ini?')">
+                        <i class="fas fa-trash-alt text-xs"></i> Delete
+                      </button>
+                    </form>
+
+                    <!-- Tombol aktif/nonaktif -->
+                    <form method="POST" action="/admin/users/<%= user._id %>/toggle-aktif" class="inline">
+                      <% if (user.isActive) { %>
+                        <button type="submit" class="btn-secondary text-white px-4 py-1 rounded text-sm flex items-center gap-1" onclick="return confirm('Nonaktifkan user ini?')">
+                          <i class="fas fa-user-slash text-xs"></i> Nonaktifkan
+                        </button>
+                      <% } else { %>
+                        <button type="submit" class="btn-success text-white px-4 py-1 rounded text-sm flex items-center gap-1" onclick="return confirm('Aktifkan user ini?')">
+                          <i class="fas fa-user-check text-xs"></i> Aktifkan
+                        </button>
+                      <% } %>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script pencarian -->
+  <script>
+    // Fungsi pencarian user realtime
+    document.querySelector('input[type="text"]').addEventListener('input', function (e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const rows = document.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

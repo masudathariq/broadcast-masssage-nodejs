@@ -1,0 +1,6 @@
+2025/07/18-23:46:43.943 29ec Reusing MANIFEST D:\laragon\www\wa-gooo\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/18-23:46:43.944 29ec Recovering log #6129
+2025/07/18-23:46:44.032 29ec Reusing old log D:\laragon\www\wa-gooo\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/006129.log 
+2025/07/18-23:46:44.032 29ec Delete type=2 #6128
+2025/07/18-23:46:45.148 4d4c Manual compaction at level-0 from ' u\x07\x00\x00\x00' @ 72057594037927935 : 1 .. ' v\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/18-23:46:45.199 3580 Level-0 table #6134: started
