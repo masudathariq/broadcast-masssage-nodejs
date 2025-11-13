@@ -27,15 +27,15 @@ Fungsinya untuk mengirim pesan WhatsApp secara massal dengan mudah dan efisien.
 ## 📸 Tampilan Aplikasi
 Berikut beberapa cuplikan tampilan aplikasi:
 
-| Tampilan | Gambar |
-|-----------|--------|
-| Dashboard Utama | ![Dashboard](1.png) |
-| Scan QR WhatsApp | ![Scan QR](2.png) |
-| Halaman Broadcast | ![Broadcast](3.png) |
-| Kirim Pesan Sukses | ![Success](4.png) |
-| Daftar Pesan | ![Pesan](5.png) |
-| Log Aktivitas | ![Log](6.png) |
-| Pengaturan | ![Settings](8.png) |
+| No | Keterangan | Gambar |
+|----|-------------|--------|
+| 1 | Halaman Login | ![Login](1.png) |
+| 2 | Dashboard Admin | ![Dashboard Admin](2.png) |
+| 3 | Dashboard User | ![Dashboard User](3.png) |
+| 4 | Scan QR Code untuk menyambungkan WhatsApp Sender | ![Scan QR](4.png) |
+| 5 | Halaman Kirim Pesan WhatsApp | ![Kirim Pesan](5.png) |
+| 6 | Upload Nomor Menggunakan File Excel | ![Upload Excel](6.png) |
+| 7 | Daftar Nomor yang Telah Diupload | ![Daftar Nomor](8.png) |
 
 > Semua gambar berada di folder utama proyek (`1.jpg` s.d. `7.jpg`).
 
