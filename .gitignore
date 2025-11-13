@@ -1,5 +1,20 @@
+# Node dependencies
 node_modules/
-uploads/
+
+# Session & auth
 .wwebjs_auth/
 .wwebjs_cache/
+
+# Uploads
+uploads/
+
+# Environment
 .env
+
+# Files to ignore
+*.zip
+*.rar
+*.mp4
+*.mp3
+*.exe
+*.iso
